@@ -25,7 +25,7 @@ end
 
 class ConfigurationFileFormatError < StandardError
   def initialize(config_file)
-    msg = "Configuration file #{config_file.inspect} has problems. It may be empty or in the wrong format."
+    msg = "Configuration file #{config_file.inspect} has problems. It might be empty or in the wrong format."
     super(msg)
   end    
 end
