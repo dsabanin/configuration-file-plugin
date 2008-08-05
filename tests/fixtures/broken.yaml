@@ -1,0 +1,2 @@
+root: "/var/spool"
+storage_path: "#{roots}/project_alpha.storage"

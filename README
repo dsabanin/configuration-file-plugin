@@ -1,0 +1,17 @@
+Plugin implementing configuration files with simple substitutions.
+
+= Sample usage 
+
+SITE_CONF = ConfigurationFile.new("/some/config.yml)
+p SITE_CONF.config_key1 
+
+= Sample config
+
+root: "/var/spool"
+storage_path: "#{root}/storage"
+storage_uid: 502
+storage_gid: 502
+
+
+(c) Dima Sabanin
+http://railsmonk.com
