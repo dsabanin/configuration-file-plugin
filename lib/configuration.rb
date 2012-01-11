@@ -44,9 +44,9 @@ class ConfigurationFile
   
   def initialize(config_file)
     @config_file = File.expand_path(config_file)
-    raise ConfigurationFileMissing.new(config_file) unless FileTest::exists?(config_file)
-    raise CantReadConfigurationFile.new(config_file) unless FileTest::readable?(config_file)
-    if opts = YAML.load_file(config_file)
+    raise ConfigurationFileMissing.new(@config_file) unless FileTest::exists?(@config_file)
+    raise CantReadConfigurationFile.new(@config_file) unless FileTest::readable?(@config_file)
+    if opts = YAML.load_file(@config_file)
       @options = parse_options(opts)
     else
       raise ConfigurationFileFormatError.new(config_file)
