@@ -2,7 +2,7 @@ Plugin implementing configuration files with simple substitutions.
 
 = Sample usage 
 
-SITE_CONF = ConfigurationFile.new("/some/config.yml)
+SITE_CONF = ConfigurationFile.new("/some/config.yml")
 p SITE_CONF.config_key1 
 
 = Sample config
