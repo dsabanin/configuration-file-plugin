@@ -31,10 +31,13 @@ class ConfigurationFileTest < Test::Unit::TestCase
     assert @config.inspect =~ /:storage_path/
   end
   
+  ::RAILS_ROOT = "/tmp" unless defined? ::RAILS_ROOT
+  
   def test_variables_interpolation
     @config = ConfigurationFile.new(@config_file)
     assert_equal "/var/spool", @config.options[:root]
     assert_equal "/var/spool/project_alpha.storage", @config.options[:storage_path]
+    assert_equal "/tmp/something", @config.options[:rails_root_test]
   end
   
   def test_missing_interpolation

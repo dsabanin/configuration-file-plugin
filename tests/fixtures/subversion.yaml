@@ -2,3 +2,4 @@ root: "/var/spool"
 storage_path: "#{root}/project_alpha.storage"
 storage_uid: 502
 storage_gid: 502
+rails_root_test: "#{rails_root}/something"

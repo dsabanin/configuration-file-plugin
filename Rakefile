@@ -1,6 +1,6 @@
 require 'rake'
 require 'rake/testtask'
-require 'rcov/rcovtask'
+# require 'rcov/rcovtask'
 
 
 task :default => [:test]
