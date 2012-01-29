@@ -56,6 +56,10 @@ class ConfigurationFile
   def allow_rewrites!
     @allow_rewrites = true
   end
+
+  def disallow_rewrites!
+    @allow_rewrites = false
+  end
   
   def method_missing(meth, *anything)
     return options[meth] if options.has_key?(meth)
