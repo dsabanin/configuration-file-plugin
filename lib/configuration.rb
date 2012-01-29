@@ -43,18 +43,26 @@ class ConfigurationFile
   attr_reader :options, :config_file
   
   def initialize(config_file)
-    @config_file = File.expand_path(config_file)
-    raise ConfigurationFileMissing.new(@config_file) unless FileTest::exists?(@config_file)
-    raise CantReadConfigurationFile.new(@config_file) unless FileTest::readable?(@config_file)
-    if opts = YAML.load_file(@config_file)
+    @config_file = config_file
+    raise ConfigurationFileMissing.new(config_file) unless FileTest::exists?(config_file)
+    raise CantReadConfigurationFile.new(config_file) unless FileTest::readable?(config_file)
+    if opts = YAML.load_file(config_file)
       @options = parse_options(opts)
     else
       raise ConfigurationFileFormatError.new(config_file)
     end    
   end
   
+  def allow_rewrites!
+    @allow_rewrites = true
+  end
+  
   def method_missing(meth, *anything)
     return options[meth] if options.has_key?(meth)
+    if @allow_rewrites and meth.to_s.scan(/(.+)=/).size > 0
+      options[$1.intern] = *anything
+      return
+    end
     super
   end
   
@@ -69,7 +77,7 @@ class ConfigurationFile
   
   def enrich_options(opts)
     defaults = Hash.new
-    defaults[:rails_root] = RAILS_ROOT if defined? RAILS_ROOT
+    defaults[:rails_root] = ::RAILS_ROOT if defined? ::RAILS_ROOT
     defaults.update(opts)
   end
   
